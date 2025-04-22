@@ -17,11 +17,11 @@ def model_pred():
     else:
         text = request.form['text']
         random_str = uuid.uuid4().hex
-        path = "static/" + random_str + ".svg"
+        path = "app/static/" + random_str + ".svg"
         model = load('app/model.joblib')
         np_arr = float_to_np(text)
         make_picture('app/AgesAndHeights.pkl', model, np_arr, path)
-        return render_template('index.html', href = path)
+        return render_template('index.html', href = path[4:])
         
 def make_picture(training_data, model, new_inp,output_file):
   data = pd.read_pickle(training_data)
